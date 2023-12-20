@@ -237,3 +237,225 @@ def insertion_sort_recursive(lst, n=None):
     lst[j + 1] = key
 
     return lst
+
+
+
+
+
+    ####################################################################################
+    English
+    #####################################################################################
+    # 1. Factorial
+
+# Non-recursive version
+def factorial_non_recursive(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+# Recursive version
+def factorial_recursive(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial_recursive(n - 1)
+
+# 2. Fibonacci
+
+# Non-recursive version
+def fibonacci_non_recursive(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+# Recursive version
+def fibonacci_recursive(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
+
+# 3. Binary Search
+
+# Non-recursive version
+def binary_search_non_recursive(arr, x):
+    low = 0
+    high = len(arr) - 1
+    mid = 0
+ 
+    while low <= high:
+        mid = (high + low) // 2
+        if arr[mid] < x:
+            low = mid + 1
+        elif arr[mid] > x:
+            high = mid - 1
+        else:
+            return mid
+    return -1
+
+# Recursive version
+def binary_search_recursive(arr, low, high, x):
+    if high >= low:
+        mid = (high + low) // 2
+        if arr[mid] == x:
+            return mid
+        elif arr[mid] > x:
+            return binary_search_recursive(arr, low, mid - 1, x)
+        else:
+            return binary_search_recursive(arr, mid + 1, high, x)
+    else:
+        return -1
+
+# 4. Euclidean Algorithm for GCD
+
+# Non-recursive version
+def gcd_non_recursive(a, b):
+    while(b):
+        a, b = b, a % b
+    return a
+
+# Recursive version
+def gcd_recursive(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd_recursive(b, a % b)
+
+# 5. Tower of Hanoi
+
+# Non-recursive version is complex and not usually implemented
+
+# Recursive version
+def tower_of_hanoi(n , source, target, auxiliary):
+    if n>0:
+        tower_of_hanoi(n-1, source, auxiliary, target)
+        print("Move disk",n,"from rod",source,"to rod",target)
+        tower_of_hanoi(n-1, auxiliary, target, source)
+
+# 6. Sum of an Array
+
+# Non-recursive version
+def sum_array_non_recursive(arr):
+    return sum(arr)
+
+# Recursive version
+def sum_array_recursive(arr, n):
+    if len(arr)==1:
+        return arr[0]
+    else:
+        return arr[0]+sum_array_recursive(arr[1:], n)
+
+# 7. Bubble Sort
+
+# Non-recursive version
+def bubble_sort_non_recursive(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1] :
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+# 8. Insertion Sort
+
+# Non-recursive version
+def insertion_sort_non_recursive(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i-1
+        while j >= 0 and key < arr[j] :
+                arr[j + 1] = arr[j]
+                j -= 1
+        arr[j + 1] = key
+    return arr
+
+# 9. Selection Sort
+
+# Non-recursive version
+def selection_sort_non_recursive(arr):
+    for i in range(len(arr)):
+        min_idx = i
+        for j in range(i+1, len(arr)):
+            if arr[min_idx] > arr[j]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+# 10. Quick Sort
+
+# Non-recursive version is complex and not usually implemented
+
+# Recursive version
+def partition(arr, low, high):
+    i = (low-1)
+    pivot = arr[high]
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i = i+1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return (i+1)
+
+def quick_sort_recursive(arr, low, high):
+    if len(arr) == 1:
+        return arr
+    if low < high:
+        pi = partition(arr, low, high)
+        quick_sort_recursive(arr, low, pi-1)
+        quick_sort_recursive(arr, pi+1, high)
+
+# 11. Merge Sort
+
+# Non-recursive version is complex and not usually implemented
+
+# Recursive version
+def merge_sort_recursive(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
+        merge_sort_recursive(L)
+        merge_sort_recursive(R)
+        i = j = k = 0
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+
+# 12. Depth-First Search (DFS) for Graphs
+
+# Non-recursive version
+def dfs_non_recursive(graph, start):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            stack.extend(graph[vertex] - visited)
+    return visited
+
+# Recursive version
+def dfs_recursive(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    for next in graph[start] - visited:
+        dfs_recursive(graph, next, visited)
+    return visited
+
